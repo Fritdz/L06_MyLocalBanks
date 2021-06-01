@@ -12,6 +12,7 @@
     <string name="chinese">Chinese</string>
     <string name="website">Website</string>
     <string name="dial">Contact the bank</string>
+    <string name="favourite">Toggle favourite</string>
 
     <string name="dbsweb">https://www.dbs.com.sg</string>
     <string name="ocbcweb">https://www.ocbc.com</string>

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ClipData;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -19,6 +20,9 @@ public class MainActivity extends AppCompatActivity {
     Button btnOCBC;
     Button btnUOB;
     int btnCheck=0;
+    boolean favDBS=false;
+    boolean favOCBC=false;
+    boolean favUOB=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         menu.add(0,0,0,getString(R.string.website));
         menu.add(0,1,1,getString(R.string.dial));
+        menu.add(0,2,1,getString(R.string.favourite));
 
         if(v==btnDBS){
             btnCheck=1;
@@ -65,6 +70,15 @@ public class MainActivity extends AppCompatActivity {
                 Intent intentDial = new Intent(Intent.ACTION_DIAL, Uri.parse(getString(R.string.dbsdial)));
                 startActivity(intentDial);
             }
+            else if(item.getItemId()==2){//Fav
+                if(favDBS==false){
+                    btnDBS.setTextColor(Color.RED);
+                    favDBS=true;
+                }else{
+                    btnDBS.setTextColor(Color.BLACK);
+                    favDBS=false;
+                }
+            }
         }
         else if(btnCheck==2){//OCBC
             if(item.getItemId()==0){//Website
@@ -75,6 +89,15 @@ public class MainActivity extends AppCompatActivity {
                 Intent intentDial = new Intent(Intent.ACTION_DIAL, Uri.parse(getString(R.string.ocbcweb)));
                 startActivity(intentDial);
             }
+            else if(item.getItemId()==2){//Fav
+                if(favOCBC==false){
+                    btnOCBC.setTextColor(Color.RED);
+                    favOCBC=true;
+                }else{
+                    btnOCBC.setTextColor(Color.BLACK);
+                    favOCBC=false;
+                }
+            }
         }
         else if(btnCheck==3){//UOB
             if(item.getItemId()==0){//Website
@@ -84,6 +107,15 @@ public class MainActivity extends AppCompatActivity {
             else if(item.getItemId()==1){//Dial
                 Intent intentDial = new Intent(Intent.ACTION_DIAL, Uri.parse(getString(R.string.uobweb)));
                 startActivity(intentDial);
+            }
+            else if(item.getItemId()==2){//Fav
+                if(favUOB==false){
+                    btnUOB.setTextColor(Color.RED);
+                    favUOB=true;
+                }else{
+                    btnUOB.setTextColor(Color.BLACK);
+                    favUOB=false;
+                }
             }
         }
 
