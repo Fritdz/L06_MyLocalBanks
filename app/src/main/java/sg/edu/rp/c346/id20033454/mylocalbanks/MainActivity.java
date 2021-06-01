@@ -3,10 +3,12 @@ package sg.edu.rp.c346.id20033454.mylocalbanks;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -37,8 +39,8 @@ public class MainActivity extends AppCompatActivity {
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
 
-        menu.add(0,0,0,"Website");
-        menu.add(0,1,1,"Contact the bank");
+        menu.add(0,0,0,getString(R.string.website));
+        menu.add(0,1,1,getString(R.string.dial));
 
         if(v==btnDBS){
             btnCheck=1;
@@ -56,35 +58,61 @@ public class MainActivity extends AppCompatActivity {
 
         if(btnCheck==1){//DBS
             if(item.getItemId()==0){//Website
-                Intent intentWeb = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.dbs.com.sg"));
+                Intent intentWeb = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.dbsweb)));
                 startActivity(intentWeb);
             }
             else if(item.getItemId()==1){//Dial
-                Intent intentDial = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+1800+"-"+111+"-"+1111));
+                Intent intentDial = new Intent(Intent.ACTION_DIAL, Uri.parse(getString(R.string.dbsdial)));
                 startActivity(intentDial);
             }
         }
         else if(btnCheck==2){//OCBC
             if(item.getItemId()==0){//Website
-                Intent intentWeb = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ocbc.com"));
+                Intent intentWeb = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.ocbcweb)));
                 startActivity(intentWeb);
             }
             else if(item.getItemId()==1){//Dial
-                Intent intentDial = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+1800+"-"+363+"-"+3333));
+                Intent intentDial = new Intent(Intent.ACTION_DIAL, Uri.parse(getString(R.string.ocbcweb)));
                 startActivity(intentDial);
             }
         }
         else if(btnCheck==3){//UOB
             if(item.getItemId()==0){//Website
-                Intent intentWeb = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.uob.com.sg"));
+                Intent intentWeb = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.uobweb)));
                 startActivity(intentWeb);
             }
             else if(item.getItemId()==1){//Dial
-                Intent intentDial = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+1800+"-"+222+"-"+2121));
+                Intent intentDial = new Intent(Intent.ACTION_DIAL, Uri.parse(getString(R.string.uobweb)));
                 startActivity(intentDial);
             }
         }
 
         return super.onContextItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_languages,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        int id = item.getItemId();
+
+        if(id==R.id.settingEng){
+            btnDBS.setText(getString(R.string.dbs));
+            btnOCBC.setText(getString(R.string.ocbc));
+            btnUOB.setText(getString(R.string.uob));
+
+        }
+        else if(id==R.id.settingCh){
+            btnDBS.setText(getString(R.string.dbsch));
+            btnOCBC.setText(getString(R.string.ocbcch));
+            btnUOB.setText(getString(R.string.uobch));
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
